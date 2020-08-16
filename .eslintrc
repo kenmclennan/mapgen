@@ -1,0 +1,67 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "tsconfig.test.json"
+    },
+    "extends": [
+        "airbnb-typescript/base",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended",
+        "plugin:eslint-comments/recommended"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.test.ts"
+            ],
+            "rules": {
+                "@typescript-eslint/no-explicit-any": "off"
+            }
+        }
+    ],
+    "rules": {
+        "max-len": [
+            "error",
+            120
+        ],
+        "indent": "off",
+        "@typescript-eslint/explicit-function-return-type": [
+            "off"
+        ],
+        "class-methods-use-this": "off",
+        "eslint-comments/no-unused-disable": "error",
+        "eslint-comments/disable-enable-pair": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern": "^_.*$"
+            }
+        ],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowShortCircuit": true
+            }
+        ],
+        "no-underscore-dangle": [
+            "error",
+            {
+                "allowAfterThis": true
+            }
+        ],
+        "import/prefer-default-export": "off"
+    },
+    "env": {
+        "browser": false,
+        "node": true,
+        "jest": true
+    },
+    "settings": {
+        "extensions": [
+            ".js",
+            ".ts"
+        ]
+    }
+}

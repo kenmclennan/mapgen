@@ -1,0 +1,54 @@
+{
+  "name": "mapgen",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "author": "Ken McLennan <ken@56north.net>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src/*",
+    "test": "jest"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@types/node": "^14.0.27",
+    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-typescript": "^9.0.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-eslint-comments": "^3.1.2",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "jest": "^26.4.0",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.2.0",
+    "typescript": "^3.7.2"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": {
+          "pathRegex": "\\.(spec|test)\\.ts$"
+        }
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ],
+    "rootDir": "src/",
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "reporters": [
+      "default"
+    ]
+  },
+  "files": [
+    "dist"
+  ]
+}

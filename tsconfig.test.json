@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "declaration": true,
+        "declarationDir": "./dist",
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "jsx": "react",
+        "lib": ["dom", "es5", "es6"],
+        "module": "ES2015",
+        "moduleResolution": "node",
+        "noUnusedParameters": true,
+        "outDir": "./dist",
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "target": "es5"
+    },
+    "exclude": ["node_modules", "dist", "src/**/*test.ts", "src/__tests__/*"]
+}
