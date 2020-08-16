@@ -6,15 +6,27 @@
         "emitDecoratorMetadata": true,
         "esModuleInterop": true,
         "experimentalDecorators": true,
-        "jsx": "react",
-        "lib": ["dom", "es5", "es6"],
-        "module": "ES2015",
-        "moduleResolution": "node",
         "noUnusedParameters": true,
-        "outDir": "./dist",
         "sourceMap": true,
         "strictNullChecks": true,
-        "target": "es5"
+        "lib": [
+            "dom",
+            "es5",
+            "es6"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "target": "es5",
+        "typeRoots": [
+            "./node_modules/@types",
+            "./types"
+        ]
     },
-    "exclude": ["node_modules", "dist", "src/**/*test.ts", "src/__tests__/*"]
+    "exclude": [
+        "node_modules",
+        "dist",
+        "src/**/*test.ts",
+        "src/__tests__/*"
+    ]
 }

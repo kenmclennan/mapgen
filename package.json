@@ -1,15 +1,24 @@
 {
   "name": "mapgen",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "author": "Ken McLennan <ken@56north.net>",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src/*",
-    "test": "jest"
+    "test": "jest",
+    "generate": "ts-node ./src/index.ts"
   },
   "keywords": [],
+  "dependencies": {
+    "@svgdotjs/svg.js": "^3.0.16",
+    "sharp": "^0.25.4",
+    "svgdom": "^0.1.8",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.7.2",
+    "uuid": "^8.3.0"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.10",
     "@types/node": "^14.0.27",
@@ -23,8 +32,7 @@
     "eslint-plugin-prettier": "^3.1.1",
     "jest": "^26.4.0",
     "prettier": "^2.0.5",
-    "ts-jest": "^26.2.0",
-    "typescript": "^3.7.2"
+    "ts-jest": "^26.2.0"
   },
   "jest": {
     "globals": {
