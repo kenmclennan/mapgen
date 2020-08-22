@@ -2,9 +2,11 @@ import { v4 as uuid } from 'uuid';
 import { any } from './lib/any';
 import { uniq } from './lib/uniq';
 // eslint-disable-next-line import/no-cycle
-import { River } from './generator/river2';
+import { River } from './generator/rivers';
 
 export type Direction = 'top' | 'topRight' | 'bottomRight' | 'bottom' | 'bottomLeft' | 'topLeft';
+
+export const DIRECTIONS: Direction[] = ['top', 'topRight', 'bottomRight', 'bottom', 'bottomLeft', 'topLeft'];
 
 export const inverseDirection = (direction: Direction): Direction => {
     switch (direction) {
@@ -31,8 +33,6 @@ export class HexCell {
 
     public column: number;
 
-    public topLeft?: HexCell;
-
     public top?: HexCell;
 
     public topRight?: HexCell;
@@ -42,6 +42,8 @@ export class HexCell {
     public bottom?: HexCell;
 
     public bottomLeft?: HexCell;
+
+    public topLeft?: HexCell;
 
     public altitude: number;
 
@@ -60,8 +62,7 @@ export class HexCell {
         this.row = row;
         this.column = column;
         this.altitude = 0;
-        this.riversIn = [];
-        this.riversOut = [];
+        this.rivers = [];
         this.flooded = false;
     }
 
@@ -81,12 +82,8 @@ export class HexCell {
         return any(this.rivers);
     }
 
-    public addRiverIn(direction: Direction): void {
-        this.riversIn.push(direction);
-    }
-
-    public addRiverOut(direction: Direction): void {
-        this.riversOut.push(direction);
+    public isRiverSource(): boolean {
+        return any(this.rivers.filter((river) => river.first() === this));
     }
 
     public linkTop(cell?: HexCell): void {
@@ -113,24 +110,23 @@ export class HexCell {
         this.topLeft = cell;
     }
 
-    public neighbours(): (HexCell | undefined)[] {
+    public neighboursList(): (HexCell | undefined)[] {
         return [this.top, this.topRight, this.bottomRight, this.bottom, this.bottomLeft, this.topLeft];
     }
 
-    public neighboursWithDirection(): [Direction, HexCell | undefined][] {
-        return [
-            ['top', this.top],
-            ['topRight', this.topRight],
-            ['bottomRight', this.bottomRight],
-            ['bottom', this.bottom],
-            ['bottomLeft', this.bottomLeft],
-            ['topLeft', this.topLeft],
-        ];
+    public neighbours(): { [key in Direction]: HexCell | undefined } {
+        return {
+            top: this.top,
+            topRight: this.topRight,
+            bottomRight: this.bottomRight,
+            bottom: this.bottom,
+            bottomLeft: this.bottomLeft,
+            topLeft: this.topLeft,
+        };
     }
 
     public neighbourInDirection(direction: Direction): HexCell | undefined {
-        const n = this.neighboursWithDirection().find(([d, _cell]) => direction === d);
-        return n ? n[1] : n;
+        return this.neighbours()[direction];
     }
 
     public gridPosition(): [number, number] {
@@ -145,10 +141,16 @@ export class HexCell {
             row: this.row,
             column: this.column,
             altitude: this.altitude,
-            riversIn: this.riversIn,
-            riversOut: this.riversOut,
+            rivers: this.rivers.map(({ id }) => id),
             flooded: this.flooded,
-            neighbours: this.neighboursWithDirection().map(([direction, neighbour]) => [direction, neighbour?.id]),
+            neighbours: {
+                top: this.top?.id,
+                topRight: this.topRight?.id,
+                bottomRight: this.bottomRight?.id,
+                bottom: this.bottom?.id,
+                bottomLeft: this.bottomLeft?.id,
+                topLeft: this.topLeft?.id,
+            },
         };
     }
 }

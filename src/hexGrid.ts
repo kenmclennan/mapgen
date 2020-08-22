@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { HexCell } from './hexCell';
 import { Grid } from './grid';
 import { exists } from './lib/exists';

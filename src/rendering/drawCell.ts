@@ -1,7 +1,7 @@
 import * as svg from '@svgdotjs/svg.js';
 import { HexCell } from '../hexCell';
 import { padZero } from '../lib/pad';
-import { toCoordinates, toPoints, toFaceCoordinates } from './cellCoordinates';
+import { toCoordinates, toPoints } from './cellCoordinates';
 import { HexMapOptions } from '../HexMapOptions';
 
 const getBaseColour = (altitude: number): string => {
@@ -16,29 +16,6 @@ export const drawCellBaseColour = (canvas: svg.Svg, options: HexMapOptions) => (
     const points = toPoints(options.hexSize)(cell);
     const baseColour = cell.flooded ? 'blue' : getBaseColour(cell.altitude);
     canvas.polygon(points).fill(baseColour);
-};
-
-export const drawRivers = (canvas: svg.Svg, options: HexMapOptions) => (cell?: HexCell): void => {
-    if (!cell) return;
-    const coords = toCoordinates(options.hexSize)(cell);
-    cell.riversOut.forEach((direction) => {
-        const neighbour = cell.neighbourInDirection(direction);
-        const width = options.riverWidth;
-        if (neighbour) {
-            const neighbourCoords = toCoordinates(options.hexSize)(neighbour);
-            canvas.line([coords.centerX, coords.centerY, neighbourCoords.centerX, neighbourCoords.centerY]).stroke({
-                width,
-                color: 'blue',
-            });
-        }
-        if (!neighbour) {
-            const [x, y] = toFaceCoordinates(options.hexSize)(cell)[direction];
-            canvas.line([coords.centerX, coords.centerY, x, y]).stroke({
-                width,
-                color: 'blue',
-            });
-        }
-    });
 };
 
 export const drawLabels = (canvas: svg.Svg, options: HexMapOptions) => (cell?: HexCell): void => {

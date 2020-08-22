@@ -1,12 +1,13 @@
 import sharp from 'sharp';
 import * as fs from 'fs';
 import { HexMap } from './HexMap';
+import { D } from './lib/dice';
 
 const map = new HexMap({
     height: 16,
     width: 20,
     hexSize: 60,
-    peaks: 7,
+    peaks: D(7),
     fontSize: 16,
     lineWidth: 2,
     riverSourceAltitude: 8,
